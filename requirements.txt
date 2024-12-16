@@ -1,0 +1,6 @@
+sagemaker ~= 2.0
+torch >= 2.0
+torchvision >= 0.18
+ipykernel ~= 6.0
+matplotlib ~= 3.0
+torchinfo ~= 1.5
