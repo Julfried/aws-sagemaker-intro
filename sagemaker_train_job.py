@@ -20,7 +20,8 @@ estimator = Estimator(
     entry_point='train.py', 
     instance_count=1,
     instance_type='ml.t3.xlarge',
-    output_path='s3://ffg-bp/pytorch-mnist',
+    output_path="s3://ffg-bp/pytorch-mnist_output",
+    code_location="s3://ffg-bp/pytorch-mnist_source",
     hyperparameters={
         "batch-size": str(128),
         "lr": str(0.001),
