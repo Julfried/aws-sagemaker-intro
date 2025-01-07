@@ -1,9 +1,7 @@
 import sagemaker
 import boto3
 import sagemaker.logs
-from sagemaker.pytorch import PyTorch
 from sagemaker.estimator import Estimator
-from sagemaker.utils import name_from_base
 
 # Create a SageMaker session
 session = boto3.Session(region_name='eu-central-1')
