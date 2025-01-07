@@ -14,6 +14,7 @@ role = "arn:aws:iam::008038232967:role/service-role/SageMaker-BP2023_FHDataScien
 
 # Define a Sagemaker estimator
 estimator = Estimator(
+    base_job_name="mnist-example",
     role=role,
     image_uri="763104351884.dkr.ecr.eu-central-1.amazonaws.com/pytorch-training:2.5.1-cpu-py311-ubuntu22.04-sagemaker",
     session=sagemaker_session,
@@ -24,4 +25,4 @@ estimator = Estimator(
     output_path='s3://ffg-bp/pytorch-mnist',
 )
 
-estimator.fit(job_name=name_from_base("mnist-example"))
+estimator.fit()
