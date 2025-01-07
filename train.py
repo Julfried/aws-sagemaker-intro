@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 import argparse
 import pathlib
+import os
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 from model import SimpleCNN
@@ -49,7 +50,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--epochs", type=int, default=10)
-    parser.add_argument("--output-dir", type=str, default="./opt/ml/model") # Default output directory for SageMaker
+    parser.add_argument('--model-dir', type=str, default=os.environ['SM_MODEL_DIR']) # SM_MODEL_DIR is an environment variable created by SageMaker that specifies the directory where the model artifacts are stored
     args = parser.parse_args()
 
     # Define data transformations
@@ -76,10 +77,10 @@ if __name__ == "__main__":
     train(model, train_loader, optimizer, loss_fn, device)
     evaluate(model, test_loader, device)
 
-    # Save the model
-    output_dir = pathlib.Path(args.output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
-    output_path = output_dir / "model.pth"
-    torch.save(model.state_dict(), output_path)
+    # Save the model to the correct output directory
+    output_path = os.path.join(args.model_dir, 'model.pth')
+    with open(output_path, 'wb') as f:
+        torch.save(model.state_dict(), f)
+    print(f"Model saved to {output_path}")
 
 

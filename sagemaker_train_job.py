@@ -2,6 +2,7 @@ import sagemaker
 import boto3
 import sagemaker.logs
 from sagemaker.estimator import Estimator
+import logging
 
 CPU_INSTANCE = "ml.t3.2xlarge"
 GPU_INSTANCE = "ml.g5.2xlarge"
@@ -31,7 +32,7 @@ estimator = Estimator(
         "batch-size": str(128),
         "lr": str(0.001),
         "epochs": str(10)
-    }
+    },
 )
 
-estimator.fit()
+estimator.fit(wait=False)
