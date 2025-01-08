@@ -2,7 +2,6 @@ import sagemaker
 import boto3
 import sagemaker.logs
 from sagemaker.estimator import Estimator
-import logging
 
 CPU_INSTANCE = "ml.t3.2xlarge"
 GPU_INSTANCE = "ml.g5.2xlarge"
